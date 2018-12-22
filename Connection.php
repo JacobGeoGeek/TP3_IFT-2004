@@ -7,7 +7,7 @@ session_start();
 
 if (isset($_REQUEST['Connecter'])) {
    
-    $connect = oci_connect('C##JACHA199', 'bd111180596', 'ift-p-ora12c.fsg.ulaval.ca:1521/ora12c');
+    $connect = oci_connect("Insert les params for connetion");
     try {
         $stid = oci_parse($connect, "select count(*) nb from TP2_CLIENT where NOM_USAGER_CLIENT = '{$_POST['UserName']}' and MOT_DE_PASSE_CLI = '{$_POST['Password']}'");
         oci_execute($stid);
