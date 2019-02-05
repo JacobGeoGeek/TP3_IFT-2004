@@ -45,7 +45,7 @@ $FavorisExiste = "";
 
 
 
-$connect = oci_connect('C##JACHA199', 'bd111180596', 'ift-p-ora12c.fsg.ulaval.ca:1521/ora12c');
+$connect = oci_connect('C##IDUL', 'bdNI', 'ift-p-ora12c.fsg.ulaval.ca:1521/ora12c');
 
 // On retourne une image aléatoire pour une promotion
 $stid = oci_parse($connect, "select * from(select * from TP2_PROMOTION order by dbms_random.value) where rownum=1");
@@ -71,7 +71,7 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) != false) {
 }
 $MusicJukeBox .= "</select>";
 oci_close($connect);
-$connect = oci_connect('C##JACHA199', 'bd111180596', 'ift-p-ora12c.fsg.ulaval.ca:1521/ora12c');
+$connect = oci_connect('C##IDUL', 'bdNI', 'ift-p-ora12c.fsg.ulaval.ca:1521/ora12c');
 $stid = oci_parse($connect, "begin TP3_VERFIER_LECTURE; end;");
 oci_execute($stid);
 oci_close($connect);
@@ -115,7 +115,7 @@ if (isset($_REQUEST["Ok"])) {
         $ArtisteValeur = "'%{$_POST['Artiste']}%'";
     }
     
-    $connect = oci_connect('C##JACHA199', 'bd111180596', 'ift-p-ora12c.fsg.ulaval.ca:1521/ora12c');
+    $connect = oci_connect('C##IDUL', 'bdNI', 'ift-p-ora12c.fsg.ulaval.ca:1521/ora12c');
     $stid = oci_parse($connect, "select TI.CODE_TITRE, AR.NOM_ART,AL.TITRE_ALB,TI.TITRE_TIT from TP2_TITRE TI
                                         inner join TP2_ALBUM AL on TI.NO_ALBUM = AL.NO_ALBUM
                                         inner join TP2_ARTISTE AR on TI.NO_ARTISTE=AR.NO_ARTISTE
@@ -146,7 +146,7 @@ if (isset($_REQUEST["Ok"])) {
 <?php
 
 if (isset($_REQUEST['Tous'])) {
-    $connect = oci_connect('C##JACHA199', 'bd111180596', 'ift-p-ora12c.fsg.ulaval.ca:1521/ora12c');
+    $connect = oci_connect('C##IDUL', 'bdNI', 'ift-p-ora12c.fsg.ulaval.ca:1521/ora12c');
     $stid = oci_parse($connect, "select TI.CODE_TITRE, AR.NOM_ART,AL.TITRE_ALB,TI.TITRE_TIT from TP2_TITRE TI
                                         inner join TP2_ALBUM AL on TI.NO_ALBUM = AL.NO_ALBUM
                                         inner join TP2_ARTISTE AR on TI.NO_ARTISTE=AR.NO_ARTISTE");
@@ -171,7 +171,7 @@ if (isset($_REQUEST['AjouterListeLecture'])) {
     
     $pageRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && ($_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0' || $_SERVER['HTTP_CACHE_CONTROL'] == 'no-cache');
 
-    $connect = oci_connect('C##JACHA199', 'bd111180596', 'ift-p-ora12c.fsg.ulaval.ca:1521/ora12c');
+    $connect = oci_connect('C##IDUL', 'bdNI', 'ift-p-ora12c.fsg.ulaval.ca:1521/ora12c');
     if ($pageRefreshed != 1) {
         $LectureEnCours="";
         $datecommande = date("d-m-Y H:i:s");
@@ -217,7 +217,7 @@ if (isset($_REQUEST['AjoutFavoris'])) {
    
     try {
         $FavorisExiste="";
-        $connect = oci_connect('C##JACHA199', 'bd111180596', 'ift-p-ora12c.fsg.ulaval.ca:1521/ora12c');
+        $connect = oci_connect('C##IDUL', 'bdNI', 'ift-p-ora12c.fsg.ulaval.ca:1521/ora12c');
         $stid = oci_parse($connect, "select count(*) from TP2_FAVORIS where NOM_USAGER_CLIENT='{$_SESSION['Username']}' and CODE_TITRE='{$_POST['LectureEnCours']}'");
         oci_execute($stid);
         if(($row = oci_fetch_array($stid, OCI_NUM)) != false){
@@ -254,7 +254,7 @@ if (isset($_REQUEST['AjoutFavoris'])) {
 }
 if (isset($_REQUEST['SupFavoris'])) {
     $FavorisExiste="";
-    $connect = oci_connect('C##JACHA199', 'bd111180596', 'ift-p-ora12c.fsg.ulaval.ca:1521/ora12c');
+    $connect = oci_connect('C##IDUL', 'bdNI', 'ift-p-ora12c.fsg.ulaval.ca:1521/ora12c');
     if(!empty($_POST['ChansonFavoris'])){
         $stid = oci_parse($connect, "delete from TP2_FAVORIS where NOM_USAGER_CLIENT='{$_SESSION['Username']}' and CODE_TITRE='{$_POST['ChansonFavoris']}'");
         oci_execute($stid);
